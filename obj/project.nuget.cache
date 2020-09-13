@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "62KF65+XkzpFhuqpf+R1C00F9UKZ3UFpa5phMSw+V9qziWy7qnzm4svUovcrSVz9NJBv34PhlFpduuwUmUuWTg==",
+  "success": true,
+  "projectFilePath": "/home/sammy/Documents/C#/PaperSDL/PaperSDL.csproj",
+  "expectedPackageFiles": [
+    "/home/sammy/.nuget/packages/raylib-cs/3.1.5/raylib-cs.3.1.5.nupkg.sha512",
+    "/home/sammy/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
