@@ -20,6 +20,7 @@ namespace PaperSDL
         private void PaperStart() {
             Awake();
             InitWindow(width, height, title);
+            Console.WriteLine("PSDL: OpenGL context opened");
             Start();
             
             while(!WindowShouldClose()) {

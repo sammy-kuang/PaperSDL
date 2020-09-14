@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PaperSDL</id>
+    <version>1.0.0</version>
+    <authors>PaperSDL</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Raylib-cs" version="3.1.5" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/netcoreapp3.1/Raylib-cs.targets" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="/home/sammy/Documents/C#/PaperSDL/bin/Debug/netcoreapp3.1/PaperSDL.runtimeconfig.json" target="lib/netcoreapp3.1/PaperSDL.runtimeconfig.json" />
+    <file src="/home/sammy/Documents/C#/PaperSDL/bin/Debug/netcoreapp3.1/PaperSDL.dll" target="lib/netcoreapp3.1/PaperSDL.dll" />
+    <file src="/home/sammy/.nuget/packages/raylib-cs/3.1.5/contentFiles/any/netstandard2.1/Raylib-cs.targets" target="content/Raylib-cs.targets" />
+    <file src="/home/sammy/.nuget/packages/raylib-cs/3.1.5/contentFiles/any/netstandard2.1/Raylib-cs.targets" target="contentFiles/any/netcoreapp3.1/Raylib-cs.targets" />
+  </files>
+</package>
