@@ -51,11 +51,31 @@ namespace PaperSDL {
             return CircleClicked(circle.position, circle.radius, mb);
         }
 
+        // held click methods
+
+        public static bool RectClick(Rectangle rect, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return (CheckCollisionPointRec(GetMousePosition(), rect) && IsMouseButtonDown(mb));
+        }
+
+        public static bool TextureClick(Texture2D texture, Vector2 pos, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            Rectangle rec = new Rectangle(pos.X, pos.Y, texture.width, texture.height);
+
+            return (RectClicked(rec, mb));
+        }
+
+        public static bool CircleClick(Vector2 circlePos, float radius, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON)  {
+            return (Raylib.CheckCollisionPointCircle(GetMousePosition(), circlePos, radius) && IsMouseButtonDown(mb));
+        }
+
+        public static bool CircleClick(Circle circle, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return CircleClicked(circle.position, circle.radius, mb);
+        }
+
+
         // draw methods
         public static void DrawCircle(Circle circle, Color color) {
             Raylib.DrawCircle((int)circle.position.X, (int)circle.position.Y, circle.radius, color);
         }
-
         
     }
 
