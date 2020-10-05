@@ -76,6 +76,10 @@ namespace PaperSDL {
         public static void DrawCircle(Circle circle, Color color) {
             Raylib.DrawCircle((int)circle.position.X, (int)circle.position.Y, circle.radius, color);
         }
+
+        public static void DrawText(FontData fontData, string text,  Vector2 position, Color color, float spacing=0) {
+            Raylib.DrawTextEx(fontData.font, text, position, fontData.fontSize, spacing, color);
+        }
         
     }
 
