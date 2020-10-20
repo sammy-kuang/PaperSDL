@@ -5,9 +5,10 @@ using PaperSDL;
 
 public class SampleProgram : PaperApp {
     public SampleProgram() : base(800, 600, "Sup") {}
-    Rectangle rect = new Rectangle();
     Color col = Color.GREEN;
-
+    CenteredRectangle rect;
+    // Texture2D texture;
+    FontData defaultFont;
 
     public static void Main() {
         new SampleProgram();
@@ -15,27 +16,20 @@ public class SampleProgram : PaperApp {
 
     public override void Start() {
         Console.WriteLine("Started Start Function");
-        Vector2 pos = PaperUtils.CenterRectToPoint(new Vector2(100, 100), new Vector2(width/2, height/2));
-        rect = new Rectangle(pos.X , pos.Y, 100, 100);
-
+        defaultFont = new FontData(Raylib.GetFontDefault(), 16);
+        rect = new CenteredRectangle(new Vector2(width/2, height/2), new Vector2(100, 100));
         Console.WriteLine(Raylib.GetScreenWidth());
     }
 
     public override void Update() {
-        if(PaperUtils.RectClicked(rect)) {
+        if(PaperUtils.RectClicked(rect.GetRectangle(), MouseButton.MOUSE_LEFT_BUTTON)) {
             col = (col.Equals(Color.GREEN)) ? Color.RED : Color.GREEN;
-            int newWidth = Raylib.GetScreenWidth() == 800 ? 1280 : 800;
-            int newHeight = Raylib.GetScreenHeight() == 600 ? 720 : 600;
-
-            Raylib.SetWindowSize(newWidth, newHeight);
-
-            CenterWindow();
         }
     }
 
     public override void Draw() {
         Raylib.ClearBackground(Color.DARKGRAY);
-        Raylib.DrawRectangleRec(rect, col);
+        Raylib.DrawRectangleRec(rect.GetRectangle(), col);
     }
 
     private void CenterWindow() {

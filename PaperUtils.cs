@@ -6,7 +6,7 @@ using static Raylib_cs.Raylib;
 namespace PaperSDL {
     public static class PaperUtils {
         // centering methods
-        public static Vector2 CenterRectToPoint(Vector2 size, Vector2 point) {
+        public static Vector2 CenterRectToPoint(Vector2 point, Vector2 size) {
             return new Vector2(point.X - size.X/2, point.Y - size.Y/2);
         }
 
@@ -32,43 +32,32 @@ namespace PaperSDL {
             return CheckCollisionPointCircle(GetMousePosition(), circle.position, circle.radius);
         }
 
-        // click detection methods
-        public static bool RectClicked(Rectangle rect, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
-            return (CheckCollisionPointRec(GetMousePosition(), rect) && IsMouseButtonPressed(mb));
-        }
-
-        public static bool TextureClicked(Texture2D texture, Vector2 pos, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+        public static bool IsMouseOver(Texture2D texture, Vector2 pos) {
             Rectangle rec = new Rectangle(pos.X, pos.Y, texture.width, texture.height);
-
-            return (RectClicked(rec, mb));
+            return CheckCollisionPointRec(GetMousePosition(), rec);
         }
-
-        public static bool CircleClicked(Vector2 circlePos, float radius, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON)  {
-            return (Raylib.CheckCollisionPointCircle(GetMousePosition(), circlePos, radius) && IsMouseButtonPressed(mb));
-        }
-
-        public static bool CircleClicked(Circle circle, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
-            return CircleClicked(circle.position, circle.radius, mb);
-        }
-
-        // held click methods
 
         public static bool RectClick(Rectangle rect, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
-            return (CheckCollisionPointRec(GetMousePosition(), rect) && IsMouseButtonDown(mb));
-        }
-
-        public static bool TextureClick(Texture2D texture, Vector2 pos, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
-            Rectangle rec = new Rectangle(pos.X, pos.Y, texture.width, texture.height);
-
-            return (RectClicked(rec, mb));
-        }
-
-        public static bool CircleClick(Vector2 circlePos, float radius, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON)  {
-            return (Raylib.CheckCollisionPointCircle(GetMousePosition(), circlePos, radius) && IsMouseButtonDown(mb));
+            return (IsMouseOver(rect) && Raylib.IsMouseButtonDown(mb));
         }
 
         public static bool CircleClick(Circle circle, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
-            return CircleClicked(circle.position, circle.radius, mb);
+            return (IsMouseOver(circle) && Raylib.IsMouseButtonDown(mb));
+        }
+
+        public static bool TextureClick(Texture2D texture, Vector2 pos, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return (IsMouseOver(texture, pos) && Raylib.IsMouseButtonDown(mb));
+        }
+        public static bool RectClicked(Rectangle rect, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return (IsMouseOver(rect) && Raylib.IsMouseButtonPressed(mb));
+        }
+
+        public static bool CircleClicked(Circle circle, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return (IsMouseOver(circle) && Raylib.IsMouseButtonPressed(mb));
+        }
+
+        public static bool TextureClicked(Texture2D texture, Vector2 pos, MouseButton mb = MouseButton.MOUSE_LEFT_BUTTON) {
+            return (IsMouseOver(texture, pos) && Raylib.IsMouseButtonPressed(mb));
         }
 
 
@@ -79,6 +68,10 @@ namespace PaperSDL {
 
         public static void DrawText(FontData fontData, string text,  Vector2 position, Color color, float spacing=0) {
             Raylib.DrawTextEx(fontData.font, text, position, fontData.fontSize, spacing, color);
+        }
+
+        public static void DrawCenteredTexture(CenteredTexture texture) {
+            Raylib.DrawTexture(texture.GetTexture(), (int)texture.literalPosition.X, (int)texture.literalPosition.Y, Color.WHITE);
         }
         
     }
@@ -100,6 +93,39 @@ namespace PaperSDL {
         public Circle(Vector2 position, float radius) {
             this.position = position;
             this.radius = radius;
+        }
+    }
+
+    public class CenteredRectangle {
+        public Rectangle rectangle;
+        public Vector2 literalPosition;
+        public Vector2 position;
+
+        public CenteredRectangle(Vector2 pos, Vector2 size) {
+            position = pos;
+            literalPosition = PaperUtils.CenterRectToPoint(pos, size);
+            rectangle = new Rectangle(literalPosition.X, literalPosition.Y, size.X, size.Y);
+        }
+
+        public Rectangle GetRectangle() {
+            return rectangle;
+        }
+    }
+
+    public class CenteredTexture {
+        public Texture2D texture;
+        public Vector2 literalPosition;
+        public Vector2 position;
+
+        public CenteredTexture(Texture2D texture, Vector2 pos) {
+            this.texture = texture;
+            position = pos;
+            literalPosition = PaperUtils.CenterTextureToPoint(texture, pos);
+
+        }
+
+        public Texture2D GetTexture() {
+            return texture;
         }
     }
 }
