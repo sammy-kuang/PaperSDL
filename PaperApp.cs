@@ -17,7 +17,7 @@ namespace PaperSDL
             PaperStart();
         }
 
-        private void PaperStart() {
+        public virtual void PaperStart() {
             Awake();
             InitWindow(width, height, title);
             Console.WriteLine("PSDL: OpenGL context opened");
@@ -32,7 +32,7 @@ namespace PaperSDL
             CloseWindow();
         }
 
-        private void PaperDraw() {
+        public virtual void PaperDraw() {
             BeginDrawing();
             Draw();
             EndDrawing();

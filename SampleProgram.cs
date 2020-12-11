@@ -15,10 +15,8 @@ public class SampleProgram : PaperApp {
     }
 
     public override void Start() {
-        Console.WriteLine("Started Start Function");
         defaultFont = new FontData(Raylib.GetFontDefault(), 16);
         rect = new CenteredRectangle(new Vector2(width/2, height/2), new Vector2(100, 100));
-        Console.WriteLine(Raylib.GetScreenWidth());
     }
 
     public override void Update() {
@@ -34,7 +32,6 @@ public class SampleProgram : PaperApp {
 
     private void CenterWindow() {
         // Raylib.SetWindowPosition(Raylib.GetMonitorWidth(0)/2 - Raylib.GetScreenWidth()/2, Raylib.GetMonitorHeight(0)/2 );
-
         Raylib.SetWindowPosition(0,0);
         
     }

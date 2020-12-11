@@ -10,16 +10,16 @@ namespace PaperSDL {
             return new Vector2(point.X - size.X/2, point.Y - size.Y/2);
         }
 
-        public static Vector2 CenterTextToPoint(Font font, float fontSize, string text, Vector2 point) {
+        public static Vector2 CenterTextToPoint(Vector2 point, Font font, float fontSize, string text) {
             Vector2 textSize = MeasureTextEx(font, text, fontSize, 0);
             return new Vector2(point.X - textSize.X/2, point.Y - textSize.Y/2);
         }
 
-        public static Vector2 CenterTextToPoint(FontData fontData, string text, Vector2 point) {
-            return CenterTextToPoint(fontData.font, fontData.fontSize, text, point);
+        public static Vector2 CenterTextToPoint(Vector2 point, FontData fontData, string text) {
+            return CenterTextToPoint(point, fontData.font, fontData.fontSize, text);
         }
 
-        public static Vector2 CenterTextureToPoint(Texture2D texture, Vector2 point) {
+        public static Vector2 CenterTextureToPoint(Vector2 point, Texture2D texture) {
             return new Vector2(point.X - texture.width/2, point.Y - texture.height/2);
         }
 
@@ -60,7 +60,6 @@ namespace PaperSDL {
             return (IsMouseOver(texture, pos) && Raylib.IsMouseButtonPressed(mb));
         }
 
-
         // draw methods
         public static void DrawCircle(Circle circle, Color color) {
             Raylib.DrawCircle((int)circle.position.X, (int)circle.position.Y, circle.radius, color);
@@ -70,8 +69,8 @@ namespace PaperSDL {
             Raylib.DrawTextEx(fontData.font, text, position, fontData.fontSize, spacing, color);
         }
 
-        public static void DrawCenteredTexture(CenteredTexture texture) {
-            Raylib.DrawTexture(texture.GetTexture(), (int)texture.literalPosition.X, (int)texture.literalPosition.Y, Color.WHITE);
+        public static void DrawCenteredObject(CenteredObject obj) {
+            obj.Draw();
         }
         
     }
@@ -96,36 +95,62 @@ namespace PaperSDL {
         }
     }
 
-    public class CenteredRectangle {
-        public Rectangle rectangle;
+    public abstract class CenteredObject {
         public Vector2 literalPosition;
         public Vector2 position;
 
-        public CenteredRectangle(Vector2 pos, Vector2 size) {
+        public CenteredObject(Vector2 pos) {
             position = pos;
+        }
+
+        public abstract void Center();
+        public abstract void Draw();
+    }
+
+    public class CenteredRectangle : CenteredObject {
+        public Rectangle rectangle;
+        public Vector2 size;
+
+        public CenteredRectangle(Vector2 pos, Vector2 size) : base(pos){
+            this.size = size;
             literalPosition = PaperUtils.CenterRectToPoint(pos, size);
-            rectangle = new Rectangle(literalPosition.X, literalPosition.Y, size.X, size.Y);
+
+            Center();
         }
 
         public Rectangle GetRectangle() {
             return rectangle;
         }
+
+        public override void Center() {
+            literalPosition = PaperUtils.CenterRectToPoint(position, size);
+            rectangle = new Rectangle(literalPosition.X, literalPosition.Y, size.X, size.Y);
+        }
+
+        public override void Draw() {
+            Raylib.DrawRectangleRec(rectangle, Color.BLACK); // Call this method if you want a custom colour
+        }
     }
 
-    public class CenteredTexture {
+    public class CenteredTexture : CenteredObject {
         public Texture2D texture;
-        public Vector2 literalPosition;
-        public Vector2 position;
 
-        public CenteredTexture(Texture2D texture, Vector2 pos) {
+        public CenteredTexture(Vector2 pos, Texture2D texture) : base(pos) {
             this.texture = texture;
-            position = pos;
-            literalPosition = PaperUtils.CenterTextureToPoint(texture, pos);
 
+            Center();
         }
 
         public Texture2D GetTexture() {
             return texture;
+        }
+
+        public override void Center() {
+            literalPosition = PaperUtils.CenterTextureToPoint(position, texture);
+        }
+        
+        public override void Draw() {
+            Raylib.DrawTexture(texture, (int)literalPosition.X, (int)literalPosition.Y, Color.WHITE);
         }
     }
 }
