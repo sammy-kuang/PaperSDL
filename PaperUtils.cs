@@ -10,13 +10,13 @@ namespace PaperSDL {
             return new Vector2(point.X - size.X/2, point.Y - size.Y/2);
         }
 
-        public static Vector2 CenterTextToPoint(Vector2 point, Font font, float fontSize, string text) {
-            Vector2 textSize = MeasureTextEx(font, text, fontSize, 0);
+        public static Vector2 CenterTextToPoint(Vector2 point, Font font, float fontSize, string text, float spacing = 0f) {
+            Vector2 textSize = MeasureTextEx(font, text, fontSize, spacing);
             return new Vector2(point.X - textSize.X/2, point.Y - textSize.Y/2);
         }
 
         public static Vector2 CenterTextToPoint(Vector2 point, FontData fontData, string text) {
-            return CenterTextToPoint(point, fontData.font, fontData.fontSize, text);
+            return CenterTextToPoint(point, fontData.font, fontData.fontSize, text, fontData.spacing);
         }
 
         public static Vector2 CenterTextureToPoint(Vector2 point, Texture2D texture) {
@@ -65,23 +65,25 @@ namespace PaperSDL {
             Raylib.DrawCircle((int)circle.position.X, (int)circle.position.Y, circle.radius, color);
         }
 
-        public static void DrawText(FontData fontData, string text,  Vector2 position, Color color, float spacing=0) {
-            Raylib.DrawTextEx(fontData.font, text, position, fontData.fontSize, spacing, color);
+        public static void DrawText(FontData fontData, string text,  Vector2 position, Color color) {
+            Raylib.DrawTextEx(fontData.font, text, position, fontData.fontSize, fontData.spacing, color);
         }
 
         public static void DrawCenteredObject(CenteredObject obj) {
             obj.Draw();
         }
-        
+
     }
 
     public class FontData {
         public Font font;
         public float fontSize;
+        public float spacing;
 
-        public FontData(Font font, float fontSize) {
+        public FontData(Font font, float fontSize, float spacing = 0f) {
             this.font = font;
             this.fontSize = fontSize;
+            this.spacing = spacing;
         }
     }
 
