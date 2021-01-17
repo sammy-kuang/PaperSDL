@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/sammy/Documents/C#/PaperSDL/PaperSDL.csproj": {}
+    "C:\\Users\\drsmm\\Documents\\C#\\PaperSDL\\PaperSDL.csproj": {}
   },
   "projects": {
-    "/home/sammy/Documents/C#/PaperSDL/PaperSDL.csproj": {
+    "C:\\Users\\drsmm\\Documents\\C#\\PaperSDL\\PaperSDL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sammy/Documents/C#/PaperSDL/PaperSDL.csproj",
+        "projectUniqueName": "C:\\Users\\drsmm\\Documents\\C#\\PaperSDL\\PaperSDL.csproj",
         "projectName": "PaperSDL",
-        "projectPath": "/home/sammy/Documents/C#/PaperSDL/PaperSDL.csproj",
-        "packagesPath": "/home/sammy/.nuget/packages/",
-        "outputPath": "/home/sammy/Documents/C#/PaperSDL/obj/",
+        "projectPath": "C:\\Users\\drsmm\\Documents\\C#\\PaperSDL\\PaperSDL.csproj",
+        "packagesPath": "C:\\Users\\drsmm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\drsmm\\Documents\\C#\\PaperSDL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/sammy/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\drsmm\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -24,7 +24,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -36,7 +35,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Raylib-cs": {
               "target": "Package",
@@ -58,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

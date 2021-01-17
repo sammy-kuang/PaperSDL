@@ -32,7 +32,7 @@ public class SampleProgram : PaperApp {
 
     public override void Draw() {
         Raylib.ClearBackground(Color.DARKGRAY);
-        Raylib.DrawRectangleRec(rect.GetRectangle(), col);
+        rect.Draw(col);
         centeredText.Draw();
     }
 }
