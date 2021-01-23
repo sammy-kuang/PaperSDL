@@ -4,7 +4,7 @@ using Raylib_cs;
 using PaperSDL;
 
 public class SampleProgram : PaperApp {
-    public SampleProgram() : base(800, 600, "Sup") {}
+    public SampleProgram() : base(800, 600, "PaperSDL") {}
     Color col = Color.GREEN;
     CenteredRectangle rect;
     // Texture2D texture;
@@ -21,6 +21,7 @@ public class SampleProgram : PaperApp {
 
         // CenteredText Showcase
         centeredText = new CenteredText(new Vector2(width/2, height/2), new FontData(Raylib.GetFontDefault(), 16f), Color.WHITE, "PaperSDL");
+        
     }
 
     public override void Update() {

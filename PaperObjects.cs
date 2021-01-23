@@ -146,3 +146,45 @@ public class FontData
         this.spacing = spacing;
     }
 }
+
+public class CenteredAnimatedTexture : CenteredObject {
+    public Texture2D[] frames;
+    private float fps;
+    private float nextFrameTime;
+    private Texture2D currentFrame;
+    private int currentIndex = 0;
+
+    public CenteredAnimatedTexture(Vector2 pos, Texture2D[] frames, float fps) : base(pos) {
+        this.frames = frames;
+        this.fps = fps;
+        position = pos;
+        nextFrameTime = fps;
+        currentFrame = frames[currentIndex];
+        Center();
+    }
+
+
+    public void Update(float deltaTime) {
+        if(nextFrameTime > 0) {
+            nextFrameTime -= deltaTime;
+        }
+        else {
+            currentIndex++;
+            if(currentIndex>frames.Length-1)
+                currentIndex = 0;
+            currentFrame = frames[currentIndex];
+
+            nextFrameTime = fps;
+        }
+    }
+
+    public override void Center()
+    {
+        literalPosition = PaperUtils.CenterTextureToPoint(position, currentFrame);
+    }
+
+    public override void Draw() {
+        Update(Raylib.GetFrameTime());
+        Raylib.DrawTexture(currentFrame, (int)literalPosition.X, (int)literalPosition.Y, Color.WHITE);
+    }
+}
